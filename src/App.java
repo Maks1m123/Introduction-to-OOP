@@ -1,7 +1,10 @@
 package org.skypro.skyshop;
 
 import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.product.DiscountedProduct;
+import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.SimpleProduct;
 
 public class App {
     public static void main(String[] args) {
@@ -11,12 +14,15 @@ public class App {
 
         basket.printBasket();
 
-        Product iceCream = new Product("Мороженое", 150);
-        Product tomato = new Product("Помидоры", 70);
-        Product milk = new Product("Молоко", 50);
-        Product bananas = new Product("Бананы", 112);
-        Product bred = new Product("Хлеб", 15);
-        Product butter = new Product("Масло", 95);
+        Product iceCream = new SimpleProduct("Мороженое", 150);
+        Product tomato = new SimpleProduct("Помидоры", 70);
+
+        Product milk = new DiscountedProduct("Молоко", 50,10);
+        Product bananas = new DiscountedProduct("Бананы", 112,25);
+        Product bred = new DiscountedProduct("Хлеб", 100,30);
+
+        Product butter = new FixPriceProduct("Журнал");
+        Product book = new FixPriceProduct("Книга");
 
         basket.addProduct(iceCream);
         basket.addProduct(milk);
@@ -24,6 +30,7 @@ public class App {
         basket.addProduct(bananas);
         basket.addProduct(bred);
         basket.addProduct(butter);
+        basket.addProduct(book);
 
 
         basket.printBasket();
@@ -39,6 +46,7 @@ public class App {
         System.out.println("Стоимость пустой корзины: " + basket.getTotalCost());
 
         System.out.println("Есть ли молоко в пустой корзине ? " + basket.checkProduct("Молоко"));
+
 
 
 
