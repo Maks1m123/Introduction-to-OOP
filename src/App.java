@@ -64,13 +64,13 @@ public class App {
         System.out.println("Результат поиска 'Молоко' ");
         for (Searchable item : results1){
             if (item != null){
-                System.out.println(item.getStingRepresentation());
+                System.out.println(item.getStringRepresentation());
             }
         }
         System.out.println("Результат поиска 'Название' ");
         for (Searchable item : results2){
             if (item != null){
-                System.out.println(item.getStingRepresentation());
+                System.out.println(item.getStringRepresentation());
             }
         }
 

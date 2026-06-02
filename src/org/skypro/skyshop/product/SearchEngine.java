@@ -12,8 +12,11 @@ public class SearchEngine {
 
     public void add(Searchable element) {
 
-        searchables[count] = element;
-        count++;
+        if (count < searchables.length) {
+            searchables[count] = element;
+            count++;
+        }
+
     }
 
     public Searchable[] search(String query) {

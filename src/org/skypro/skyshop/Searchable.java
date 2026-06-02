@@ -6,8 +6,9 @@ public interface Searchable {
     String getType();
     String getName();
 
-default String getStingRepresentation(){
-    return getName() + " -" + getType();
+default String getStringRepresentation(){
+    return getName() + " - " + getType();
+
 }
 
 }
