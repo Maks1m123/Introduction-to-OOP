@@ -74,6 +74,26 @@ public class App {
             }
         }
 
+        SearchEngine engine = new SearchEngine(5);
+
+        engine.add(bananas);
+        engine.add(milk);
+        System.out.println("Поиск нужного");
+
+        try{
+            Searchable result = engine.findBest("Молоко");
+            System.out.println("Подходящий элемент"+result.getSearchTerm());
+        } catch (SearchEngine.BestResultNotFound e) {
+            throw new RuntimeException("Ошибка поиска- "+e.getMessage());
+        }
+        System.out.println("\n Поиск не существующего ");
+        try {
+            Searchable result = engine.findBest("Пахлава");
+            System.out.println("Этого нету "+result.getSearchTerm());
+        } catch (SearchEngine.BestResultNotFound e) {
+            throw new RuntimeException("Поймали Исключение"+e.getMessage());
+        }
+
 
 
 
