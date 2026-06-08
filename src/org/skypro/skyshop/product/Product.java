@@ -34,4 +34,5 @@ public abstract class Product implements Searchable {
         return "PRODUCT";
     }
 
+
 }
