@@ -76,22 +76,23 @@ public class App {
 
         SearchEngine engine = new SearchEngine(5);
 
-        engine.add(bananas);
-        engine.add(milk);
+        engine.add(milk);    // В нем есть слово "Молоко"
+        engine.add(bananas); // В нем есть слово "Бананы"
+        engine.add(tomato);
         System.out.println("Поиск нужного");
 
         try{
             Searchable result = engine.findBest("Молоко");
-            System.out.println("Подходящий элемент"+result.getSearchTerm());
+            System.out.println("Подходящий элемент "+result.getSearchTerm());
         } catch (SearchEngine.BestResultNotFound e) {
-            throw new RuntimeException("Ошибка поиска- "+e.getMessage());
+            System.out.println("Ошибка поиска- "+e.getMessage());
         }
-        System.out.println("\n Поиск не существующего ");
+        System.out.println("\nПоиск не существующего ");
         try {
             Searchable result = engine.findBest("Пахлава");
             System.out.println("Этого нету "+result.getSearchTerm());
         } catch (SearchEngine.BestResultNotFound e) {
-            throw new RuntimeException("Поймали Исключение"+e.getMessage());
+            System.out.println("Поймали Исключение "+e.getMessage());
         }
 
     }
