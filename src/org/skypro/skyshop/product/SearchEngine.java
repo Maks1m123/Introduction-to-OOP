@@ -2,60 +2,49 @@ package org.skypro.skyshop.product;
 
 import org.skypro.skyshop.Searchable;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class SearchEngine {
-    private Searchable[] searchables;
-    private int count = 0;
+    private final List<Searchable> searchables = new ArrayList<>();
 
 
-    public SearchEngine(int size) {
-        this.searchables = new Searchable[size];
+    public SearchEngine() {
     }
 
     public void add(Searchable element) {
-
-        if (count < searchables.length) {
-            searchables[count] = element;
-            count++;
-        }
-
+        searchables.add(element);
     }
 
-    public Searchable[] search(String query) {
+    public List<Searchable> search(String query) {
 
-
-        Searchable[] result = new Searchable[5];
-        int resultsCount = 0;
-
-        for (int i = 0; i < searchables.length; i++) {
-            if (searchables[i] != null) {
-                String term = searchables[i].getSearchTerm();
-                if (term.contains(query)) {
-                    result[resultsCount] = searchables[i];
-                    resultsCount++;
-                }
-                if (resultsCount == 5) {
-                    break;
-                }
+        List<Searchable> result = new ArrayList<>();
+        for (Searchable item : searchables) {
+            String term = item.getSearchTerm();
+            if (term.contains(query)) {
+                result.add(item);
             }
         }
         return result;
     }
-    public static class BestResultNotFound extends Exception{
+
+    public static class BestResultNotFound extends Exception {
         public BestResultNotFound(String search) {
-            super("Не нашлось подходящего резульатат "+ search);
+            super("Не нашлось подходящего резульатат " + search);
         }
     }
 
-    public Searchable findBest(String search) throws BestResultNotFound  {
+    public Searchable findBest(String search) throws BestResultNotFound {
 
         if (search == null || search.isEmpty()) {
-            throw new BestResultNotFound("Ничего не найдено "+ search);
+            throw new BestResultNotFound("Ничего не найдено " + search);
         }
         Searchable bestMatch = null;
         int maxCount = 0;
 
-        for (int i = 0; i < count; i++) {
-            String term = searchables[i].getSearchTerm();
+        for (Searchable item : searchables) {
+            String term = item.getSearchTerm();
 
             int currentCount = 0;
             int index = 0;
@@ -68,11 +57,11 @@ public class SearchEngine {
             }
             if (currentCount > maxCount) {
                 maxCount = currentCount;
-                bestMatch = searchables[i];
+                bestMatch = item;
             }
-            if (bestMatch == null) {
-                throw new BestResultNotFound("Не нашлось подходящего резульатат " + search);
-            }
+        }
+        if (bestMatch == null) {
+            throw new BestResultNotFound("Не нашлось подходящего резульатат " + search);
         }
         return bestMatch;
     }
