@@ -4,8 +4,8 @@ import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.*;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
@@ -74,16 +74,16 @@ public class App {
         searchEngine.add(article2);
         searchEngine.add(article1);
 
-        List<Searchable> results1 = searchEngine.search("Молоко");
-        List<Searchable> results2 = searchEngine.search("Название");
+        Map<String,Searchable> results1 = searchEngine.search("Молоко");
+        Map<String,Searchable> results2 = searchEngine.search("Название");
 
         System.out.println("Результат поиска 'Молоко' ");
-        for (Searchable item : results1) {
+        for (Searchable item : results1.values()) {
             System.out.println(item.getStringRepresentation());
         }
 
         System.out.println("Результат поиска 'Название' ");
-        for (Searchable item : results2) {
+        for (Searchable item : results2.values()) {
             System.out.println(item.getStringRepresentation());
         }
 
