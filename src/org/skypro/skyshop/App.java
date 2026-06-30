@@ -5,7 +5,7 @@ import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.*;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
@@ -74,23 +74,25 @@ public class App {
         searchEngine.add(article2);
         searchEngine.add(article1);
 
-        Map<String,Searchable> results1 = searchEngine.search("Молоко");
-        Map<String,Searchable> results2 = searchEngine.search("Название");
+        Set<Searchable> results1 = searchEngine.search("Молоко");
+        Set<Searchable> results2 = searchEngine.search("Название");
 
         System.out.println("Результат поиска 'Молоко' ");
-        for (Searchable item : results1.values()) {
+        for (Searchable item : results1) {
             System.out.println(item.getStringRepresentation());
         }
 
         System.out.println("Результат поиска 'Название' ");
-        for (Searchable item : results2.values()) {
+        for (Searchable item : results2) {
             System.out.println(item.getStringRepresentation());
         }
 
         SearchEngine engine = new SearchEngine();
 
-        engine.add(milk);    // В нем есть слово "Молоко"
-        engine.add(bananas); // В нем есть слово "Бананы"
+        engine.add(milk);
+        engine.add(milk);
+        engine.add(bananas);
+        engine.add(tomato);
         engine.add(tomato);
         System.out.println("Поиск нужного ");
 

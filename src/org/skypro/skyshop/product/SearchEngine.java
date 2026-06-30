@@ -5,7 +5,7 @@ import org.skypro.skyshop.Searchable;
 import java.util.*;
 
 public class SearchEngine {
-    private final List<Searchable> searchables = new ArrayList<>();
+    private final Set<Searchable> searchables = new HashSet<>();
 
 
     public SearchEngine() {
@@ -15,14 +15,24 @@ public class SearchEngine {
         searchables.add(element);
     }
 
-    public Map<String,Searchable> search(String query) {
+    public Set<Searchable> search(String query) {
 
-        Map<String,Searchable> result = new TreeMap<>();
+        Set<Searchable> result = new TreeSet<>((o1, o2) -> {
+
+            String name1 = o1.getName();
+            String name2 = o2.getName();
+            int lengthCompare = Integer.compare(name2.length(), name1.length());
+
+            if (lengthCompare != 0) {
+            return lengthCompare;
+            }
+            return name1.compareTo(name2);});
+
         for (Searchable item : searchables) {
             String searchTerm = item.getSearchTerm();
 
             if (searchTerm.contains(query)) {
-                result.put(item.getName(), item);
+                result.add(item);
             }
         }
         return result;
